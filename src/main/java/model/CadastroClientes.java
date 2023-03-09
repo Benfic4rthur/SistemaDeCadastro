@@ -2,59 +2,49 @@ package model;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
+
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class IndexSistema extends JFrame {
-	/**
+public class CadastroClientes extends JFrame {
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Long id;
+    private Long id;
 
-	public IndexSistema(Long id) {
-		this.id = id;
+    public CadastroClientes(Long id) {
+        this.id = id;
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Cadastro - Sistema Cadastral");
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Index - Sistema Cadastral");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+        // carregar imagem de fundo
+        ImageIcon imagemFundo = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\background.jpg");
 
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = (int) screenSize.getWidth();
-		int height = (int) screenSize.getHeight();
+        // criar JLabel com a imagem de fundo
+        JLabel labelFundo = new JLabel(imagemFundo);
+        labelFundo.setBounds(0, 0, width, height);
+        contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
+        
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
 
-		// carregar imagem de fundo
-		ImageIcon imagemFundo = new ImageIcon(
-				"C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\background.jpg");
+        JMenu mnCadastro = new JMenu("Clientes");
+        menuBar.add(mnCadastro);
 
-		// criar JLabel com a imagem de fundo
-		JLabel labelFundo = new JLabel(imagemFundo);
-		labelFundo.setBounds(0, 0, width, height);
-		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
-
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnCadastro = new JMenu("Clientes");
-		menuBar.add(mnCadastro);
-
-		JMenuItem mntmCadastroCliente = new JMenuItem("Cadastro de cliente");
+        JMenuItem mntmCadastroCliente = new JMenuItem("Cadastro de cliente");
 		mntmCadastroCliente.addActionListener(e -> {
 		    dispose(); // Fecha a janela atual
 		    CadastroClientes cadastroClientes = new CadastroClientes(id);
@@ -92,4 +82,9 @@ public class IndexSistema extends JFrame {
 
 	}
 
+        
+    public static void main(String[] args) {
+        IndexSistema frame = new IndexSistema(null);
+        frame.setVisible(true);
+    }
 }

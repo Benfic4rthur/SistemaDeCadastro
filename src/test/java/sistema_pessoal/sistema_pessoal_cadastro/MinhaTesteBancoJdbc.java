@@ -4,18 +4,19 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import dao.DaoSistema;
-import model.MinhaUserPosJava;
+import dao.DaoLogin;
+import model.DadosLogin;
 
 public class MinhaTesteBancoJdbc {
 	private Long id;
-
-	@Test
-	public void initBanco() throws SQLException {
-		DaoSistema dao = new DaoSistema();
-		id = (Long) null;
-		MinhaUserPosJava minhaUserPosJava = new MinhaUserPosJava(id, null, null);
-		
-		dao.selectLogin(minhaUserPosJava);
+	
+	public void login() { // vai consultar o login no banco baseado nos dados informados pela userposjava
+		DaoLogin dao = new DaoLogin();
+		try {
+			Long userPosJava = dao.buscarLogin(null, null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

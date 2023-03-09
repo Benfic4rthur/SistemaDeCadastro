@@ -1,17 +1,16 @@
 package model;
 
-
-public class MinhaUserPosJava {
+public class DadosLogin {
 	private long id;
 	private String login;
 	private String senha;
 	
-	public MinhaUserPosJava(long id, String login, String senha) {
+	public void salvaCadastro(long id, String login, String senha) {
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -34,6 +33,11 @@ public class MinhaUserPosJava {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		return "MinhaUserPosJava [id=" + id + ", login=" + login + ", senha=" + senha + "]";
 	}
 
 }
