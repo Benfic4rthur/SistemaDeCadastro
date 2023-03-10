@@ -242,8 +242,7 @@ public class ListaClientes extends JFrame {
 		tipoPessoa.add(pessoaFisica);
 		tipoPessoa.add(pessoaJuridica);
 
-		// Criação dos campos de texto para CPF (caso pessoa física) e CNPJ (caso pessoa
-		// jurídica)
+		// Criação dos campos de texto para CPF (caso pessoa física) e CNPJ (caso pessoa jurídica)
 		JLabel lblCpfCnpj = new JLabel("CPF/CNPJ:");
 		lblCpfCnpj.setBounds(512, 195, 400, 25);
 		lblCpfCnpj.setFont(font);
@@ -270,34 +269,13 @@ public class ListaClientes extends JFrame {
 
 		contentPane.add(lblCpfCnpj);
 		contentPane.add(cpfcnpJTextField);
-
-		JLabel lblbuscaCliente = new JLabel("pesquisa:");
-		lblbuscaCliente.setBounds(10, 239, 80, 25);
-		lblbuscaCliente.setFont(font);
-		lblbuscaCliente.setForeground(Color.WHITE); // Define a cor do texto como branco
-
-		buscaClienteTextField = new JTextField();
-		buscaClienteTextField.setBounds(90, 240, 320, 25);
-		buscaClienteTextField.setFont(font);
-		buscaClienteTextField.setForeground(Color.BLACK); // Define a cor do texto como preto
-		buscaClienteTextField.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-
-		contentPane.add(lblbuscaCliente);
-		contentPane.add(buscaClienteTextField);
 		
-		nome.setEnabled(false);
-		email.setEnabled(false);
-		telefone.setEnabled(false);
-		dataNascimento.setEnabled(false);
-		endereco.setEnabled(false);
-		profissao.setEnabled(false);
-		cpfcnpJTextField.setEnabled(false);
-		pessoaFisica.setEnabled(false);
-		pessoaJuridica.setEnabled(false);
-
+		
 		// Atribui à variável connection uma instância de Connection obtida através do
 		// método getConnection() da classe SingleConnection
 		connection = SingleConnection.getConnection();
+		
+		//tabela com os dados do banco
 
 		JTable table = new JTable();
 		DaoCliente dao = new DaoCliente();
@@ -330,7 +308,7 @@ public class ListaClientes extends JFrame {
 		scrollPane.setBounds(5, 270, 875, 400);
 		contentPane.add(scrollPane);
 
-		// botão editar
+		// botão de edição
 
 		JButton btnEditar = new JButton();
 		btnEditar.addActionListener(new ActionListener() {
@@ -406,6 +384,8 @@ public class ListaClientes extends JFrame {
 		iconeeditar = new ImageIcon(imagem);
 		btnEditar.setIcon(iconeeditar);
 		contentPane.add(btnEditar);
+		
+		//botão que salva a edição
 
 		JButton btnSalvar = new JButton();
 		btnSalvar.addActionListener(new ActionListener() {
@@ -446,6 +426,8 @@ public class ListaClientes extends JFrame {
 		iconesalvar = new ImageIcon(imagem2);
 		btnSalvar.setIcon(iconesalvar);
 		contentPane.add(btnSalvar);
+		
+		//botão que faz o delete
 
 		JButton btnExcluir = new JButton();
 		btnExcluir.addActionListener(new ActionListener() {
@@ -482,6 +464,8 @@ public class ListaClientes extends JFrame {
 		btnExcluir.setIcon(iconeapagar);
 		contentPane.add(btnExcluir);
 		
+		//botão para um novo cadastro
+		
 		JButton btnAdicionar = new JButton();
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -508,12 +492,14 @@ public class ListaClientes extends JFrame {
 		btnAdicionar.setIcon(iconeadicionar);
 		contentPane.add(btnAdicionar);
 		
+		//botão que atualiza a lista
+		
 		JButton btnAtualizar = new JButton();
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 				if (selectedRow == -1) {
-										// Atualiza a tabela com os dados atualizados
+					// Atualiza a tabela com os dados atualizados
 					List<Cliente> usuariosAtualizados = dao.editar();
 					model.atualizar(usuariosAtualizados);
 
@@ -529,6 +515,7 @@ public class ListaClientes extends JFrame {
 		btnAtualizar.setIcon(iconeatualizar);
 		contentPane.add(btnAtualizar);
 		
+		//botão de relatorio
 		
 		JButton btnRelatorio = new JButton();
 		btnRelatorio.addActionListener(new ActionListener() {
@@ -544,6 +531,45 @@ public class ListaClientes extends JFrame {
 			btnRelatorio.setBounds(750, 680, 130, 32);
 			btnRelatorio.setText("Relatorio em pdf");
 			contentPane.add(btnRelatorio);
+			
+			//campo de pesquisa de clientes
+
+			JLabel lblbuscaCliente = new JLabel("pesquisa:");
+			lblbuscaCliente.setBounds(10, 239, 80, 25);
+			lblbuscaCliente.setFont(font);
+			lblbuscaCliente.setForeground(Color.WHITE); // Define a cor do texto como branco
+
+			buscaClienteTextField = new JTextField();
+			buscaClienteTextField.setBounds(90, 240, 320, 25);
+			buscaClienteTextField.setFont(font);
+			buscaClienteTextField.setForeground(Color.BLACK); // Define a cor do texto como preto
+			buscaClienteTextField.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+			buscaClienteTextField.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e) {
+			    	DaoCliente dao = new DaoCliente();
+			        String textoPesquisa = buscaClienteTextField.getText();
+
+			        // Executa a consulta no banco de dados para buscar todos os clientes
+			        List<Cliente> todosClientes = dao.editar();
+
+			        // Filtra os clientes com base no texto de pesquisa digitado pelo usuário
+			        List<Cliente> clientesFiltrados = new ArrayList<>();
+			        for (Cliente cliente : todosClientes) {
+			            if (cliente.getNome().toLowerCase().contains(textoPesquisa.toLowerCase())) {
+			                clientesFiltrados.add(cliente);
+			            }
+			        }
+
+			     // Atualiza a tabela com os dados atualizados
+					List<Cliente> usuariosAtualizados = dao.editar();
+					model.atualizar(clientesFiltrados);
+			    }
+			});
+
+			contentPane.add(lblbuscaCliente);
+			contentPane.add(buscaClienteTextField);
+	
+			
 
 		// adicionar a imagem de fundo com camada abaixo dos campos de login e senha
 		contentPane.add(dataNascimento, new Integer(-1));
@@ -559,6 +585,8 @@ public class ListaClientes extends JFrame {
 		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
 	}
 
+	//metodo que faz o update na base de dados
+	
 	public void salvaeditado() throws IOException, Exception {
 		DaoCliente dao = new DaoCliente();
 		String buscaUltimoId = dao.buscaId();
@@ -639,6 +667,9 @@ public class ListaClientes extends JFrame {
 		// Chama o método de atualização do DAO passando o objeto criado como argumento
 		dao.update(cliente);
 	}
+	
+	//metodo que gera o relatorio em pdf
+	
 	public void gerarRelatorioPDF(JTable table) {
 	    Document document = new Document();
 

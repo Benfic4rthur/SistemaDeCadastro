@@ -37,12 +37,13 @@ import dao.DaoCliente;
 import pacoteDados.Cliente;
 
 public class CadastroClientes extends JFrame {
-	
-	/* public static void main(String[] args) {
-		CadastroClientes frame = new CadastroClientes(null);
-		frame.setVisible(true);
 
-	} */
+	/*
+	 * public static void main(String[] args) { CadastroClientes frame = new
+	 * CadastroClientes(null); frame.setVisible(true);
+	 * 
+	 * }
+	 */
 
 	/**
 	 *
@@ -66,7 +67,7 @@ public class CadastroClientes extends JFrame {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro de clientes - Sistema Cadastral");
-		setSize(800,700 );
+		setSize(800, 700);
 		setExtendedState(JFrame.MAXIMIZED_BOTH ^ JFrame.MAXIMIZED_VERT);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,8 +76,6 @@ public class CadastroClientes extends JFrame {
 
 		// Centralize a janela na tela
 		setLocationRelativeTo(null);
-
-
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
@@ -90,8 +89,6 @@ public class CadastroClientes extends JFrame {
 		JLabel labelFundo = new JLabel(imagemFundo);
 		labelFundo.setBounds(0, 0, width, height);
 		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
-
-	
 
 		Font font = new Font("Tahoma", Font.PLAIN, 18);
 		int fieldWidth = 180;
@@ -144,37 +141,37 @@ public class CadastroClientes extends JFrame {
 		dataNascimento = new JTextField("--/--/----");
 		dataNascimento.setBounds(255, 250, 100, 25);
 		dataNascimento.addFocusListener(new FocusAdapter() {
-		    @Override
-		    public void focusGained(FocusEvent e) {
-		        if (dataNascimento.getText().equals("--/--/----")) {
-		            dataNascimento.setText("");
-		        }
-		    }
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (dataNascimento.getText().equals("--/--/----")) {
+					dataNascimento.setText("");
+				}
+			}
 
-		    @Override
-		    public void focusLost(FocusEvent e) {
-		        String data = dataNascimento.getText();
-		        if (data.equals("")) {
-		            dataNascimento.setText("dd/mm/aaaa");
-		        }
-		    }
+			@Override
+			public void focusLost(FocusEvent e) {
+				String data = dataNascimento.getText();
+				if (data.equals("")) {
+					dataNascimento.setText("dd/mm/aaaa");
+				}
+			}
 		});
 		dataNascimento.addKeyListener(new KeyAdapter() {
-		    @Override
-		    public void keyTyped(KeyEvent e) {
-		        char c = e.getKeyChar();
-		        if (!Character.isDigit(c)) {
-		            e.consume();
-		            return;
-		        }
-		        
-		        String date = dataNascimento.getText();
-		        int length = date.length();
-		        if (length == 2 || length == 5) {
-		            date += "/";
-		            dataNascimento.setText(date);
-		        }
-		    }
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c)) {
+					e.consume();
+					return;
+				}
+
+				String date = dataNascimento.getText();
+				int length = date.length();
+				if (length == 2 || length == 5) {
+					date += "/";
+					dataNascimento.setText(date);
+				}
+			}
 		});
 		contentPane.add(dataNascimento);
 
@@ -286,6 +283,33 @@ public class CadastroClientes extends JFrame {
 		contentPane.add(pessoaFisica, new Integer(-1));
 		contentPane.add(pessoaJuridica, new Integer(-1));
 		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
+
+		// Criação do botão de salvar
+		JButton chamaListagem = new JButton("Lista de clientes");
+		chamaListagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ListaClientes listagemClientes = new ListaClientes();
+					listagemClientes.setVisible(true); // Abre a janela do sistema gráfico
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		chamaListagem.setBounds(50, 600, 130, 23);
+		contentPane.add(chamaListagem);
+
+		// adicionar a imagem de fundo com camada abaixo dos campos de login e senha
+		contentPane.add(dataNascimento, new Integer(-1));
+		contentPane.add(nome, new Integer(-1));
+		contentPane.add(telefone, new Integer(-1));
+		contentPane.add(email, new Integer(-1));
+		contentPane.add(endereco, new Integer(-1));
+		contentPane.add(profissao, new Integer(-1));
+		contentPane.add(pessoaFisica, new Integer(-1));
+		contentPane.add(pessoaJuridica, new Integer(-1));
+		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
 	}
 
 	// Método para salvar novo cliente
@@ -319,37 +343,36 @@ public class CadastroClientes extends JFrame {
 			documentoCliente = pessoaJuridica.getText();
 			tipoPessoaCliente = "j";
 		}
-		
+
 		if (nomeCliente == null || nomeCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo nome deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo nome deve ser preenchido.", "Erro", JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (emailCliente == null || emailCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo e-mail deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo e-mail deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (telefoneCliente == null || telefoneCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo telefone deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo telefone deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (dataNascimentoFormatada == null || dataNascimentoFormatada.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo data de nascimento deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo data de nascimento deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (profissaoCliente == null || profissaoCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo profissão deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo profissão deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (documentoCliente == null || documentoCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo CPF/CNPJ deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo CPF/CNPJ deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		} else if (enderecoCliente == null || enderecoCliente.isEmpty()) {
-		    JOptionPane.showMessageDialog(null, "O campo endereço deve ser preenchido.", "Erro",
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
+			JOptionPane.showMessageDialog(null, "O campo endereço deve ser preenchido.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
 		}
-		
+
 		// se todos os campos estiverem preenchidos, cria o objeto Cliente
 		Cliente cliente = new Cliente(id, nomeCliente, emailCliente, telefoneCliente, dataNascimentoFormatada,
 				profissaoCliente, documentoCliente, tipoPessoaCliente, enderecoCliente);

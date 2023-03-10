@@ -128,7 +128,7 @@ public class DaoCliente {
 		    return cliente;
 		}
 	    
-		public void update(Cliente cliente) {
+		public void update(Cliente cliente) throws SQLException {
 		    try {
 		        String sql = "UPDATE tabela_cliente SET nome=?, email=?, telefone=?, datanascimento=?, "
 		        		+ "profissao=?, documento=?, tipopessoa=?, endereco=? WHERE id=?;";
@@ -152,6 +152,7 @@ public class DaoCliente {
 		        update.execute();
 		        connection.commit();
 		    } catch (Exception e) {
+		    	connection.rollback();
 		        e.printStackTrace();
 		    }
 		}
