@@ -13,6 +13,7 @@ public class MinhaTableModel extends AbstractTableModel {
     private List<Cliente> usuarios;
     private String[] colunas = {"ID", "Nome", "E-mail", "Telefone", "Data de Nascimento", "Profissão", "Documento", "Tipo de Pessoa", "Endereço"};
     private Object[][] dados;
+	private String[] columnNames;
 
     public MinhaTableModel(List<Cliente> usuarios) {
         this.usuarios = usuarios;
@@ -58,6 +59,10 @@ public class MinhaTableModel extends AbstractTableModel {
     public void setDados(Object[][] dados) {
         this.dados = dados;
         fireTableDataChanged();
+    }
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+        fireTableStructureChanged();
     }
 
     @Override

@@ -130,7 +130,8 @@ public class DaoCliente {
 	    
 		public void update(Cliente cliente) {
 		    try {
-		        String sql = "UPDATE tabela_cliente SET nome=?, email=?, telefone=?, datanascimento=?, profissao=?, documento=?, tipopessoa=?, endereco=? WHERE id=?";
+		        String sql = "UPDATE tabela_cliente SET nome=?, email=?, telefone=?, datanascimento=?, "
+		        		+ "profissao=?, documento=?, tipopessoa=?, endereco=? WHERE id=?;";
 		        PreparedStatement update = connection.prepareStatement(sql);
 		        update.setString(1, cliente.getNome());
 		        update.setString(2, cliente.getEmail());
@@ -162,7 +163,6 @@ public class DaoCliente {
 		        delete.setLong(1, userId);
 		        delete.execute();
 		        connection.commit();
-		        delete.close();
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }

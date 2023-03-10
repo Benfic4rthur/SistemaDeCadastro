@@ -285,7 +285,7 @@ public class CadastroClientes extends JFrame {
 	public void salvarNovoCliente() {
 		DaoCliente dao = new DaoCliente();
 		String buscaUltimoId = dao.buscaId();
-		int id = (Integer.parseInt(buscaUltimoId) + 1);
+		long id = (Integer.parseInt(buscaUltimoId) + 1);
 		String nomeCliente = nome.getText();
 		String telefoneCliente = telefone.getText();
 		String emailCliente = email.getText();

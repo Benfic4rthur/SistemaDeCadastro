@@ -16,6 +16,8 @@ import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
 import dao.DaoLogin;
+import mail.EnvioJavaMail;
+import mail.envioemail;
 
 public class IndexSistema extends JFrame {
 	/**
@@ -65,10 +67,11 @@ public class IndexSistema extends JFrame {
 
 		JMenuItem mnListagemCliente = new JMenuItem("Listagem de clientes");
 		mnListagemCliente.addActionListener(e -> {
-		    dispose(); // Fecha a janela atual
 		    ListaClientes listagemClientes = new ListaClientes();
 		    listagemClientes.setVisible(true); // Abre a janela do sistema gráfico
 		});
+		
+		
 
 		// carrega a imagem que será usada como ícone
 		ImageIcon iconeSair = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\logout.png");
@@ -85,18 +88,27 @@ public class IndexSistema extends JFrame {
 		    LoginSistema login = new LoginSistema();
 		    login.setVisible(true); // Abre a janela do sistema gráfico de login
 		});
+		
+		JMenu mnMail = new JMenu("E-mail");
+		menuBar.add(mnMail);
 
+		JMenuItem mnEnviomail = new JMenuItem("Envio de E-mail");
+		mnEnviomail.addActionListener(e -> {
+		    
+			  envioemail email = new envioemail();
+			  email.setVisible(true); // Abre a janela do sistema gráfico
+		});
+		
 		menuBar.add(mnCadastro);
 		menuBar.add(Box.createHorizontalGlue()); // Adiciona espaço horizontal entre os itens de menu
-
 		// Cria um Box.Filler para preencher o espaço restante na barra de menu
 		Dimension fillerSize = new Dimension(0, 0); // tamanho inicial
 		Dimension maxSize = new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE); // tamanho máximo
 		JComponent filler = new Box.Filler(fillerSize, fillerSize, maxSize);
 		menuBar.add(filler);
-
+		menuBar.add(mnMail);
 		menuBar.add(mnSair);
-
+		mnMail.add(mnEnviomail);
 		mnCadastro.add(mntmCadastroCliente);
 		mnCadastro.add(mnListagemCliente);
 		mnCadastro.add(new JSeparator()); // Adiciona um separador vertical

@@ -1,9 +1,11 @@
 package pacoteDados;
 
+import java.time.LocalDate;
+
 import dao.DaoCliente;
 
 public class Cliente {
-	private int id;
+	private long id;
 	private String nome;
 	private String email;
 	private String telefone;
@@ -13,7 +15,7 @@ public class Cliente {
 	private String tipopessoa;
 	private String endereco;
 	
-	public Cliente(int id, String nome, String email, String telefone, String datanascimento, String profissao,
+	public Cliente(long id, String nome, String email, String telefone, String datanascimento, String profissao,
 			String documento, String tipopessoa, String endereco) {
 		super();
 		this.id = id;
@@ -26,12 +28,12 @@ public class Cliente {
 		this.tipopessoa = tipopessoa;
 		this.endereco = endereco;
 	}
-
-	public int getId() {
+	
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -99,12 +101,6 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone
-				+ ", datanascimento=" + datanascimento + ", profissao=" + profissao + ", documento=" + documento
-				+ ", tipopessoa=" + tipopessoa + ", endereco=" + endereco + "]";
-	}
 	public boolean salvaCadastro() {
 	    boolean enviadoComSucesso = false;
 	    try {
@@ -116,4 +112,29 @@ public class Cliente {
 	    }
 	    return enviadoComSucesso;
 	}
+	public boolean salvaCadastroEditado() {
+	    boolean enviadoComSucesso = false;
+	    try {
+	    	
+	    	DaoCliente dao = new DaoCliente();
+	    	Cliente usuario = dao.buscarPorId(this.getId());
+	        if (usuario != null) {
+	        	usuario.getId();
+	            usuario.setNome(this.getNome());
+	            usuario.setEmail(this.getEmail());
+	            usuario.setTelefone(this.getTelefone());
+	            usuario.setDatanascimento(this.getDatanascimento());
+	            usuario.setProfissao(this.getProfissao());
+	            usuario.setDocumento(this.getDocumento());
+	            usuario.setTipopessoa(this.getTipopessoa());
+	            usuario.setEndereco(this.getEndereco());
+	            dao.update(usuario);
+	            enviadoComSucesso = true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return enviadoComSucesso;
+	}
+
 }
