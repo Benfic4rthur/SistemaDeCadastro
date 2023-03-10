@@ -94,7 +94,7 @@ public class ListaClientes extends JFrame {
 
 	public ListaClientes() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setTitle("Listagem de MinhaUserPosJavas - Sistema Cadastral");
+		setTitle("Listagem de Clientes - Sistema Cadastral");
 		setSize(900, 850);
 		setExtendedState(JFrame.MAXIMIZED_BOTH ^ JFrame.MAXIMIZED_VERT);
 		contentPane = new JPanel();

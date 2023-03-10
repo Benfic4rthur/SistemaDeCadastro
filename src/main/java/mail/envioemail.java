@@ -210,7 +210,7 @@ public class envioemail extends JFrame {
 		String para = emailToField.getText();
 		String assunto = emailSubjectField.getText();
 		String mensagem = emailMessageArea.getText();
-		String username = "arthur.gu@hotmail.com";
+		String username = "seu email hotmail.com aqui";
 		String password = "mhytboqxsugbwiyo";
 		StringBuilder stringBuildermensagemEmail = new StringBuilder();
 		stringBuildermensagemEmail.append("<html><body style='background-color:#F5F5F5;'>");
