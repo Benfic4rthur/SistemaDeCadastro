@@ -40,15 +40,4 @@ public class DaoLogin {
 	        }
 	    }
 	}
-
-
-	public void fecharConexao() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 }

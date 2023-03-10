@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.prefs.Preferences;
 
 import javax.swing.ImageIcon;
@@ -35,10 +36,16 @@ public class LoginSistema extends JFrame {
 	private JTextField senhafield;
 	private Long id;
 	private JCheckBox lembrarSenhaCheckbox;
-
 	
-	
-	
+	private void verificarConexao() {
+	    try {
+	        if (connection == null || connection.isClosed()) {
+	            connection = SingleConnection.getConnection();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 	public static void main(String[] args) {
 		// Verifica se as informações de login e senha já foram salvas anteriormente
 		Preferences prefs = Preferences.userRoot().node("LoginSistema");
@@ -58,7 +65,7 @@ public class LoginSistema extends JFrame {
 	}
 
 	public LoginSistema() {
-		connection = SingleConnection.getConnection();
+		verificarConexao();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Login - Sistema Cadastral");
 
@@ -73,7 +80,7 @@ public class LoginSistema extends JFrame {
 
 		// carregar imagem de fundo
 		ImageIcon imagemFundo = new ImageIcon(
-				"C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\backgroudLogin.jpg");
+				"C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\backgroundLogin.jpg");
 
 		// criar JLabel com a imagem de fundo
 		JLabel labelFundo = new JLabel(imagemFundo);
@@ -117,6 +124,7 @@ public class LoginSistema extends JFrame {
 		btnLogar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        try {
+		        	verificarConexao();
 		            logar();
 		        } catch (Exception e1) {
 		            e1.printStackTrace();
@@ -124,7 +132,7 @@ public class LoginSistema extends JFrame {
 		    }
 		});
 		btnLogar.setFont(font);
-		btnLogar.setBounds(820, 630, 270, 30);
+		btnLogar.setBounds(820, 650, 270, 30);
 		btnLogar.setBackground(new Color(102, 120, 105));
 		contentPane.add(btnLogar);
 		
@@ -161,7 +169,7 @@ public class LoginSistema extends JFrame {
 
 		lembrarSenhaCheckbox = new JCheckBox("Lembrar login/senha");
 		lembrarSenhaCheckbox.setOpaque(false); // torna o fundo transparente
-		lembrarSenhaCheckbox.setBounds(815, 590, 150, 30);
+		lembrarSenhaCheckbox.setBounds(815, 600, 150, 30);
 		contentPane.add(lembrarSenhaCheckbox);
 
 		
@@ -217,11 +225,10 @@ public class LoginSistema extends JFrame {
 			dispose(); // Fecha a janela atual
 			IndexSistema sistemaGrafico = new IndexSistema(id);
 			sistemaGrafico.setVisible(true); // Abre a janela do sistema gráfico
-			// Fecha a conexão com o banco de dados
-			dao.fecharConexao();
-		} else {
+			} else {
 			JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.", "Dados Invalidos", JOptionPane.ERROR_MESSAGE);
 
 		}
+		
 	}
 }

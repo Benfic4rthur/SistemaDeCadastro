@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
+import dao.DaoLogin;
+
 public class IndexSistema extends JFrame {
 	/**
 	 * 
