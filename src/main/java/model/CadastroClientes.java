@@ -37,13 +37,13 @@ import dao.DaoCliente;
 import pacoteDados.Cliente;
 
 public class CadastroClientes extends JFrame {
-	/*
-	public static void main(String[] args) {
+	
+	/* public static void main(String[] args) {
 		CadastroClientes frame = new CadastroClientes(null);
 		frame.setVisible(true);
 
-	}
-*/
+	} */
+
 	/**
 	 *
 	 */
@@ -64,14 +64,19 @@ public class CadastroClientes extends JFrame {
 	public CadastroClientes(Long id) {
 		this.id = id;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Cadastro - Sistema Cadastral");
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Cadastro de clientes - Sistema Cadastral");
+		setSize(800,700 );
+		setExtendedState(JFrame.MAXIMIZED_BOTH ^ JFrame.MAXIMIZED_VERT);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		// Centralize a janela na tela
+		setLocationRelativeTo(null);
+
+
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth();
@@ -86,47 +91,7 @@ public class CadastroClientes extends JFrame {
 		labelFundo.setBounds(0, 0, width, height);
 		contentPane.add(labelFundo, new Integer(Integer.MIN_VALUE));
 
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnCadastro = new JMenu("Clientes");
-		menuBar.add(mnCadastro);
-
-		JMenuItem mntmCadastroCliente = new JMenuItem("Cadastro de cliente");
-		mntmCadastroCliente.addActionListener(e -> {
-			dispose(); // Fecha a janela atual
-			CadastroClientes cadastroClientes = new CadastroClientes(id);
-			cadastroClientes.setVisible(true); // Abre a janela do sistema gráfico
-		});
-
-		JMenuItem mnListagemCliente = new JMenuItem("Listagem de clientes");
-		mnListagemCliente.addActionListener(e -> {
-			dispose(); // Fecha a janela atual
-			ListaClientes listagemClientes = new ListaClientes(id);
-			listagemClientes.setVisible(true); // Abre a janela do sistema gráfico
-		});
-
-		JMenuItem mnSair = new JMenuItem("Sair");
-		mnSair.addActionListener(e -> {
-			dispose(); // Fecha a janela atual
-			LoginSistema login = new LoginSistema();
-			login.setVisible(true); // Abre a janela do sistema gráfico de login
-		});
-
-		menuBar.add(mnCadastro);
-		menuBar.add(Box.createHorizontalGlue()); // Adiciona espaço horizontal entre os itens de menu
-
-		// Cria um Box.Filler para preencher o espaço restante na barra de menu
-		Dimension fillerSize = new Dimension(0, 0); // tamanho inicial
-		Dimension maxSize = new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE); // tamanho máximo
-		JComponent filler = new Box.Filler(fillerSize, fillerSize, maxSize);
-		menuBar.add(filler);
-
-		menuBar.add(mnSair);
-
-		mnCadastro.add(mntmCadastroCliente);
-		mnCadastro.add(mnListagemCliente);
-		mnCadastro.add(new JSeparator()); // Adiciona um separador
+	
 
 		Font font = new Font("Tahoma", Font.PLAIN, 18);
 		int fieldWidth = 180;
@@ -134,16 +99,16 @@ public class CadastroClientes extends JFrame {
 
 		// Criação dos campos de texto e labels para os dados do cliente
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(620, 200, 80, 25);
+		lblNome.setBounds(100, 200, 80, 25);
 		lblNome.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblNome);
 		nome = new JTextField();
 		lblNome.setFont(font);
-		nome.setBounds(675, 200, 200, 25);
+		nome.setBounds(155, 200, 200, 25);
 		contentPane.add(nome);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(950, 200, 80, 25);
+		lblTelefone.setBounds(420, 200, 80, 25);
 		lblTelefone.setForeground(Color.WHITE);
 		lblTelefone.setFont(font);
 		contentPane.add(lblTelefone);
@@ -157,27 +122,27 @@ public class CadastroClientes extends JFrame {
 			System.out.println("Erro ao criar a máscara de formatação: " + ex.getMessage());
 		}
 		telefone = new JFormattedTextField(mascaraTelefone);
-		telefone.setBounds(1030, 200, 200, 25);
+		telefone.setBounds(500, 200, 200, 25);
 		contentPane.add(telefone);
 
 		JLabel lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(970, 250, 80, 25);
+		lblEmail.setBounds(440, 250, 80, 25);
 		lblEmail.setFont(font);
 		lblEmail.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblEmail);
 
 		email = new JTextField();
-		email.setBounds(1030, 250, 200, 25);
+		email.setBounds(500, 250, 200, 25);
 		contentPane.add(email);
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento:");
-		lblDataNascimento.setBounds(605, 250, 200, 25);
+		lblDataNascimento.setBounds(85, 250, 200, 25);
 		lblDataNascimento.setForeground(Color.WHITE);
 		lblDataNascimento.setFont(font);
 		contentPane.add(lblDataNascimento);
 
 		dataNascimento = new JTextField("--/--/----");
-		dataNascimento.setBounds(775, 250, 100, 25);
+		dataNascimento.setBounds(255, 250, 100, 25);
 		dataNascimento.addFocusListener(new FocusAdapter() {
 		    @Override
 		    public void focusGained(FocusEvent e) {
@@ -214,35 +179,35 @@ public class CadastroClientes extends JFrame {
 		contentPane.add(dataNascimento);
 
 		JLabel lblEndereco = new JLabel("Endereço:");
-		lblEndereco.setBounds(950, 300, 80, 25);
+		lblEndereco.setBounds(417, 300, 80, 25);
 		lblEndereco.setFont(font);
 		lblEndereco.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblEndereco);
 
 		endereco = new JTextField();
-		endereco.setBounds(1030, 300, 200, 25);
+		endereco.setBounds(500, 300, 200, 25);
 		contentPane.add(endereco);
 
 		JLabel lblProfissao = new JLabel("Profissão:");
-		lblProfissao.setBounds(595, 300, 80, 25);
+		lblProfissao.setBounds(72, 300, 80, 25);
 		lblProfissao.setFont(font);
 		lblProfissao.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblProfissao);
 
 		profissao = new JTextField();
-		profissao.setBounds(675, 300, 200, 25);
+		profissao.setBounds(155, 300, 200, 25);
 		contentPane.add(profissao);
 
 		// Criação do campo para selecionar se a pessoa é física ou jurídica
 		JLabel lblTipoPessoa = new JLabel("Tipo de Pessoa:");
-		lblTipoPessoa.setBounds(780, 350, 150, 25);
+		lblTipoPessoa.setBounds(280, 350, 150, 25);
 		lblTipoPessoa.setFont(font);
 		lblTipoPessoa.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblTipoPessoa);
 
 		// Criação dos botões de opção para seleção do tipo de pessoa
 		pessoaFisica = new JRadioButton("Pessoa Física");
-		pessoaFisica.setBounds(920, 350, 150, 25);
+		pessoaFisica.setBounds(410, 350, 150, 25);
 		pessoaFisica.setFont(font);
 		pessoaFisica.setForeground(Color.WHITE);
 		pessoaFisica.setOpaque(false);
@@ -250,7 +215,7 @@ public class CadastroClientes extends JFrame {
 		contentPane.add(pessoaFisica);
 
 		pessoaJuridica = new JRadioButton("Pessoa Jurídica");
-		pessoaJuridica.setBounds(1070, 350, 160, 25);
+		pessoaJuridica.setBounds(550, 350, 160, 25);
 		pessoaJuridica.setFont(font);
 		pessoaJuridica.setForeground(Color.WHITE);
 		pessoaJuridica.setOpaque(false);
@@ -263,12 +228,12 @@ public class CadastroClientes extends JFrame {
 		// Criação dos campos de texto para CPF (caso pessoa física) e CNPJ (caso pessoa
 		// jurídica)
 		JLabel lblCpfCnpj = new JLabel("CPF/CNPJ:");
-		lblCpfCnpj.setBounds(990, 400, 400, 25);
+		lblCpfCnpj.setBounds(462, 400, 400, 25);
 		lblCpfCnpj.setFont(font);
 		lblCpfCnpj.setForeground(Color.WHITE); // Define a cor do texto como branco
 
 		cpfcnpJTextField = new JTextField();
-		cpfcnpJTextField.setBounds(1080, 400, 150, 25);
+		cpfcnpJTextField.setBounds(550, 400, 150, 25);
 		cpfcnpJTextField.setFont(font);
 		cpfcnpJTextField.setForeground(Color.BLACK); // Define a cor do texto como preto
 
@@ -301,7 +266,7 @@ public class CadastroClientes extends JFrame {
 				}
 			}
 		});
-		btnSalvar.setBounds(890, 450, 120, 23);
+		btnSalvar.setBounds(340, 450, 120, 23);
 		contentPane.add(btnSalvar);
 
 		// adicionar a imagem de fundo com camada abaixo dos campos de login e senha

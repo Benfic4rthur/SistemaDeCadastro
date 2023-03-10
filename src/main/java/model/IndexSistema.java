@@ -58,7 +58,7 @@ public class IndexSistema extends JFrame {
 
 		JMenuItem mntmCadastroCliente = new JMenuItem("Cadastro de cliente");
 		mntmCadastroCliente.addActionListener(e -> {
-		    dispose(); // Fecha a janela atual
+		    
 		    CadastroClientes cadastroClientes = new CadastroClientes(id);
 		    cadastroClientes.setVisible(true); // Abre a janela do sistema gráfico
 		});
@@ -66,11 +66,20 @@ public class IndexSistema extends JFrame {
 		JMenuItem mnListagemCliente = new JMenuItem("Listagem de clientes");
 		mnListagemCliente.addActionListener(e -> {
 		    dispose(); // Fecha a janela atual
-		    ListaClientes listagemClientes = new ListaClientes(id);
+		    ListaClientes listagemClientes = new ListaClientes();
 		    listagemClientes.setVisible(true); // Abre a janela do sistema gráfico
 		});
 
-		JMenuItem mnSair = new JMenuItem("Sair");
+		// carrega a imagem que será usada como ícone
+		ImageIcon iconeSair = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\logout.png");
+
+		// cria o JMenuItem e define o ícone
+		JMenuItem mnSair = new JMenuItem();
+		mnSair.setIcon(iconeSair);
+
+		// define o tamanho máximo da imagem
+		Dimension maxIconSize = new Dimension(30, 30);
+		mnSair.setMaximumSize(maxIconSize);
 		mnSair.addActionListener(e -> {
 		    dispose(); // Fecha a janela atual
 		    LoginSistema login = new LoginSistema();
