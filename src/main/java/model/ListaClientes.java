@@ -22,7 +22,6 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -76,7 +75,7 @@ public class ListaClientes extends JFrame {
 
 	public ListaClientes() {
 	
-
+	
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Listagem de MinhaUserPosJavas - Sistema Cadastral");
 		setSize(800, 1050);
@@ -283,9 +282,10 @@ public class ListaClientes extends JFrame {
 
 		
 		JTable table = new JTable();
-		DaoCliente dao = new DaoCliente();
-		List<Cliente> clientes = dao.editar();
-		MinhaTableModel model = new MinhaTableModel(clientes);
+		DaoCliente clienteDAO = new DaoCliente();
+		List<Cliente> DaoCliente = clienteDAO.editar();
+
+		MinhaTableModel model = new MinhaTableModel(DaoCliente);
 		table.setModel(model);
 
 		// Define a largura da coluna de ID
@@ -304,9 +304,39 @@ public class ListaClientes extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 200, 490, 250);
 		contentPane.add(scrollPane);
+				
+		
+		Object[][] data = new Object[DaoCliente.size()][9];
+		String[] columns = {"ID", "Nome", "Email", "Telefone", "Data de Nascimento", "Profissão", "Documento", "Tipo de Pessoa", "Endereço"};
+		int i = 0;
+		for (Cliente cliente : DaoCliente) {
+		    data[i][0] = cliente.getId();
+		    data[i][1] = cliente.getNome();
+		    data[i][2] = cliente.getEmail();
+		    data[i][3] = cliente.getTelefone();
+		    data[i][4] = cliente.getDatanascimento();
+		    data[i][5] = cliente.getProfissao();
+		    data[i][6] = cliente.getDocumento();
+		    data[i][7] = cliente.getTipopessoa();
+		    data[i][8] = cliente.getEndereco();
+		    i++;
+		}
+		JTable tabela = new JTable(data, columns);
+		JScrollPane scrollPane1 = new JScrollPane(tabela);
+		JPanel panel = new JPanel();
+		panel.add(scrollPane1);
 
+		JPanel mainPanel = new JPanel();
+		mainPanel.add(panel);
+
+		JFrame frame = new JFrame();
+		frame.setContentPane(mainPanel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
 /*
-		 botão edita
+		//botão editar
 		JButton btnEditar = new JButton();
 		btnEditar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -334,10 +364,11 @@ public class ListaClientes extends JFrame {
 		            model.atualizar(usuariosAtualizados);
 		        }
 		    }
-		});
+		);
 		
 		btnEditar.setBounds(40, 470, 130, 23);
 		contentPane.add(btnEditar);
+
 
 		// botão salva macaco editado
 
@@ -439,4 +470,3 @@ public class ListaClientes extends JFrame {
 		contentPane.add(btnExcluir);
 */
 	}
-}
