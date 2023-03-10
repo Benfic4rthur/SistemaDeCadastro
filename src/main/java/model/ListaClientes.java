@@ -391,7 +391,7 @@ public class ListaClientes extends JFrame {
 			}
 		});
 		// Define a posição e o tamanho do botão
-		btnEditar.setBounds(5, 680, 50, 32);
+		btnEditar.setBounds(65, 680, 50, 32);
 		nome.setEnabled(true);
 		email.setEnabled(true);
 		telefone.setEnabled(true);
@@ -417,6 +417,13 @@ public class ListaClientes extends JFrame {
 				} else {
 					try {
 						salvaeditado();
+						nome.setText("");
+						email.setText("");
+						telefone.setText("");
+						dataNascimento.setText("");
+						endereco.setText("");
+						profissao.setText("");
+						cpfcnpJTextField.setText("");
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -433,7 +440,7 @@ public class ListaClientes extends JFrame {
 				}
 			}
 		});
-		btnSalvar.setBounds(60, 680, 55, 32);
+		btnSalvar.setBounds(120, 680, 55, 32);
 		ImageIcon iconesalvar = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\salvar.png");
 		Image imagem2 = iconesalvar.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		iconesalvar = new ImageIcon(imagem2);
@@ -468,12 +475,60 @@ public class ListaClientes extends JFrame {
 				}
 			}
 		});
-		btnExcluir.setBounds(120, 680, 55, 32);
+		btnExcluir.setBounds(180, 680, 55, 32);
 		ImageIcon iconeapagar = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\excluir.png");
 		Image imagem1 = iconeapagar.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		iconeapagar = new ImageIcon(imagem1);
 		btnExcluir.setIcon(iconeapagar);
 		contentPane.add(btnExcluir);
+		
+		JButton btnAdicionar = new JButton();
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+						try {
+							CadastroClientes cadastroClientes = new CadastroClientes(id);
+						    cadastroClientes.setVisible(true); // Abre a janela do sistema gráfico
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					// Atualiza a tabela com os dados atualizados
+					List<Cliente> usuariosAtualizados = dao.editar();
+					model.atualizar(usuariosAtualizados);
+
+					// Simula um clique no botão de limpar para limpar os campos da interface
+					// gráfica
+				}
+			
+		});
+		btnAdicionar.setBounds(5, 680, 55, 32);
+		ImageIcon iconeadicionar = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\adicionar.png");
+		Image imagem3 = iconeadicionar.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		iconeadicionar = new ImageIcon(imagem3);
+		btnAdicionar.setIcon(iconeadicionar);
+		contentPane.add(btnAdicionar);
+		
+		JButton btnAtualizar = new JButton();
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = table.getSelectedRow();
+				if (selectedRow == -1) {
+										// Atualiza a tabela com os dados atualizados
+					List<Cliente> usuariosAtualizados = dao.editar();
+					model.atualizar(usuariosAtualizados);
+
+					// Simula um clique no botão de limpar para limpar os campos da interface
+					// gráfica
+				}
+			}
+		});
+		btnAtualizar.setBounds(690, 680, 55, 32);
+		ImageIcon iconeatualizar = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\atualizar.png");
+		Image imagem21 = iconeatualizar.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		iconeatualizar = new ImageIcon(imagem21);
+		btnAtualizar.setIcon(iconeatualizar);
+		contentPane.add(btnAtualizar);
+		
 		
 		JButton btnRelatorio = new JButton();
 		btnRelatorio.addActionListener(new ActionListener() {

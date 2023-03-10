@@ -260,6 +260,13 @@ public class CadastroClientes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					salvarNovoCliente();
+					nome.setText("");
+					email.setText("");
+					telefone.setText("");
+					dataNascimento.setText("");
+					endereco.setText("");
+					profissao.setText("");
+					cpfcnpJTextField.setText("");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

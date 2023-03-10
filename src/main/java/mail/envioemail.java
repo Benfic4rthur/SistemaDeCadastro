@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 public class envioemail extends JFrame {
 
@@ -103,10 +106,19 @@ public class envioemail extends JFrame {
 		deField.setBounds(106, 7, 335, 20);
 		contentPane.add(deField);
 		deField.setColumns(10);
-		telefoneField = new JTextField();
+
+		// Cria uma máscara de formatação para o telefone
+		MaskFormatter mascaraTelefone = new MaskFormatter();
+		try {
+			mascaraTelefone.setMask("(##) #####-####");
+			mascaraTelefone.setPlaceholderCharacter('_');
+		} catch (ParseException ex) {
+			System.out.println("Erro ao criar a máscara de formatação: " + ex.getMessage());
+		}
+		telefoneField = new JFormattedTextField(mascaraTelefone);
 		telefoneField.setBounds(106, 32, 335, 20);
 		contentPane.add(telefoneField);
-		telefoneField.setColumns(10);
+		
 
 		cargoField = new JTextField();
 		cargoField.setBounds(106, 57, 335, 20);
@@ -198,7 +210,7 @@ public class envioemail extends JFrame {
 		String para = emailToField.getText();
 		String assunto = emailSubjectField.getText();
 		String mensagem = emailMessageArea.getText();
-		String username = "Seu email hotmail aqui@hotmail.com";
+		String username = "arthur.gu@hotmail.com";
 		String password = "mhytboqxsugbwiyo";
 		StringBuilder stringBuildermensagemEmail = new StringBuilder();
 		stringBuildermensagemEmail.append("<html><body style='background-color:#F5F5F5;'>");
