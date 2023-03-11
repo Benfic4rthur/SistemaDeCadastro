@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-import pacoteDados.Cliente;
+import processamentoDeDados.Cliente;
 
 public class MinhaTableModel extends AbstractTableModel {
 

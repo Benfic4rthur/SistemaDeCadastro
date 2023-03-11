@@ -1,4 +1,4 @@
-package pacoteDados;
+package processamentoDeDados;
 
 public class DadosLogin {
 	private long id;

@@ -1,4 +1,4 @@
-package model;
+package grafico;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,7 +34,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import dao.DaoCliente;
-import pacoteDados.Cliente;
+import processamentoDeDados.Cliente;
+import processamentoDeDados.LimitarCaracteres;
 
 public class CadastroClientes extends JFrame {
 

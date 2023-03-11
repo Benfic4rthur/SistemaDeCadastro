@@ -1,4 +1,4 @@
-package model;
+package grafico;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

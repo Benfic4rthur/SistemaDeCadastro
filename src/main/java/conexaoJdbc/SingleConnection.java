@@ -17,6 +17,7 @@ public class SingleConnection {
 	static {
 		conectar();
 	}
+
 	// Método responsável por estabelecer a conexão com o banco de dados
 	private static void conectar() {
 		try {
@@ -24,9 +25,11 @@ public class SingleConnection {
 			if (conexao == null) {
 				// Registra o driver JDBC para o PostgreSQL
 				Class.forName("org.postgresql.Driver");
-				// Estabelece a conexão com o banco de dados usando as informações definidas acima
+				// Estabelece a conexão com o banco de dados usando as informações definidas
+				// acima
 				conexao = DriverManager.getConnection(url, user, password);
-				// Define que as transações precisam ser confirmadas manualmente (não são confirmadas automaticamente)
+				// Define que as transações precisam ser confirmadas manualmente (não são
+				// confirmadas automaticamente)
 				conexao.setAutoCommit(false);
 			}
 		} catch (Exception e) {
@@ -34,12 +37,24 @@ public class SingleConnection {
 			e.printStackTrace();
 		}
 	}
+
 	// Construtor da classe, chama o método conectar()
 	public SingleConnection() {
 		conectar();
 	}
+
 	// Método que retorna a conexão estabelecida
 	public static Connection getConnection() {
 		return conexao;
+	}
+
+	public static void fecharConexao() {
+		try {
+			if (conexao != null) {
+				conexao.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

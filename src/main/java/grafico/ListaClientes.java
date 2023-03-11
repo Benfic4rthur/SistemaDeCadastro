@@ -1,4 +1,4 @@
-package model;
+package grafico;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -61,7 +61,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import MinhaTableModel.MinhaTableModel;
 import conexaoJdbc.SingleConnection;
 import dao.DaoCliente;
-import pacoteDados.Cliente;
+import processamentoDeDados.Cliente;
+import processamentoDeDados.LimitarCaracteres;
 
 public class ListaClientes extends JFrame {
 	/**
@@ -913,7 +914,7 @@ public class ListaClientes extends JFrame {
 	    Document document = new Document();
 
 	    try {
-	    	PdfWriter.getInstance(document, new FileOutputStream("C:\\relatorios sistema\\relatorio.pdf"));
+	    	PdfWriter.getInstance(document, new FileOutputStream("C:\\Sigm4 - Sistema De Gestão\\relatorios\\relatorio de cadastro de clientes.pdf"));
 	    	
 
 	    	// Define as margens do documento
@@ -952,12 +953,13 @@ public class ListaClientes extends JFrame {
 	    	}
 
 	    	// Obtém o arquivo do relatório
-	    	File relatorio = new File("C:\\relatorios sistema\\relatorio.pdf");
+	    	File relatorio = new File("C:\\Sigm4 - Sistema De Gestão\\relatorios\\relatorio de cadastro de clientes.pdf");
 
 	    	// Abre o arquivo com o aplicativo padrão do sistema
 	    	Desktop.getDesktop().open(relatorio);
 
 	    	document.add(pdfTable);
+	    	
 
 	    } catch (Exception e) {
 	        e.printStackTrace();

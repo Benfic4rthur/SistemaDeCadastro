@@ -1,4 +1,4 @@
-package model;
+package grafico;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -169,7 +169,7 @@ public class LoginSistema extends JFrame {
 
 		lembrarSenhaCheckbox = new JCheckBox("Lembrar login/senha");
 		lembrarSenhaCheckbox.setOpaque(false); // torna o fundo transparente
-		lembrarSenhaCheckbox.setBounds(815, 600, 150, 30);
+		//lembrarSenhaCheckbox.setBounds(815, 600, 150, 30);
 		contentPane.add(lembrarSenhaCheckbox);
 
 		
