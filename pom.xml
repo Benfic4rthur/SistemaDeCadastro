@@ -20,6 +20,24 @@
 
   <dependencies>
 	  <dependency>
+    <groupId>net.sourceforge.dynamicreports</groupId>
+    <artifactId>dynamicreports-core</artifactId>
+    <version>6.1.0</version>
+</dependency>
+
+ <dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>6.17.0</version>
+</dependency>
+
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports-fonts</artifactId>
+    <version>6.0.0</version>
+</dependency>
+
+	  <dependency>
   <groupId>com.sun.mail</groupId>
   <artifactId>javax.mail</artifactId>
   <version>1.6.2</version>
@@ -36,21 +54,17 @@
     <artifactId>itextpdf</artifactId>
     <version>5.5.13.2</version>
 </dependency>
+	<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>layout</artifactId>
+    <version>7.1.15</version>
+</dependency>
 <dependency>
     <groupId>com.itextpdf</groupId>
-    <artifactId>itext-pdfa</artifactId>
-    <version>5.5.13.2</version>
+    <artifactId>layout</artifactId>
+    <version>7.1.15</version>
 </dependency>
-<dependency>
-    <groupId>com.itextpdf</groupId>
-    <artifactId>itext-xtra</artifactId>
-    <version>5.5.13.2</version>
-</dependency>
-<dependency>
-    <groupId>com.itextpdf.tool</groupId>
-    <artifactId>xmlworker</artifactId>
-    <version>5.5.13.2</version>
-</dependency>
+
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -63,7 +77,12 @@
 			<artifactId>postgresql</artifactId>
 			 <version>42.3.0</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>pos-java-jdbc</groupId>
+			<artifactId>pos-java-jdbc</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

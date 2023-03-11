@@ -1,4 +1,4 @@
-package model;
+package pacoteDados;
 
 public class DadosLogin {
 	private long id;

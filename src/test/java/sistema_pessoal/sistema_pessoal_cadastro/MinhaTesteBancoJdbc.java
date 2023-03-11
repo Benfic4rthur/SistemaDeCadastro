@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import dao.DaoLogin;
-import model.DadosLogin;
+import pacoteDados.DadosLogin;
 
 public class MinhaTesteBancoJdbc {
 	private Long id;

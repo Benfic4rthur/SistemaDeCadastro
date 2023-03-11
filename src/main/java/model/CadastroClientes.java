@@ -68,7 +68,15 @@ public class CadastroClientes extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Cadastro de clientes - Sistema Cadastral");
 		setSize(800, 700);
-		setExtendedState(JFrame.MAXIMIZED_BOTH ^ JFrame.MAXIMIZED_VERT);
+		 // Impede a maximização da janela
+	      setResizable(false);
+
+	      // Define o estado da janela como "MAXIMIZED_VERT" para impedir a maximização vertical
+	      setExtendedState(getExtendedState() | JFrame.MAXIMIZED_VERT);
+
+	      // Define o estado da janela como "MAXIMIZED_HORIZ" para impedir a maximização horizontal
+	      setExtendedState(getExtendedState() | JFrame.MAXIMIZED_HORIZ);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,6 +103,14 @@ public class CadastroClientes extends JFrame {
 		int fieldHeight = 30;
 
 		// Criação dos campos de texto e labels para os dados do cliente
+		
+		Font fonte = new Font("Tahoma", Font.PLAIN, 30);
+		JLabel lblTitulo = new JLabel("Cadastro de clientes");
+		lblTitulo.setBounds(270, 100, 300, 25);
+		lblTitulo.setForeground(Color.WHITE); // Define a cor do texto como branco
+		lblTitulo.setFont(fonte);
+		contentPane.add(lblTitulo);
+		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setBounds(100, 200, 80, 25);
 		lblNome.setForeground(Color.WHITE); // Define a cor do texto como branco
@@ -168,9 +184,12 @@ public class CadastroClientes extends JFrame {
 				String date = dataNascimento.getText();
 				int length = date.length();
 				if (length == 2 || length == 5) {
-					date += "/";
-					dataNascimento.setText(date);
+				    LimitarCaracteres limitador = new LimitarCaracteres(10); // Limita a 10 caracteres
+				    dataNascimento.setDocument(limitador);
+				    date += "/";
+				    dataNascimento.setText(date);
 				}
+
 			}
 		});
 		contentPane.add(dataNascimento);
@@ -225,26 +244,60 @@ public class CadastroClientes extends JFrame {
 		// Criação dos campos de texto para CPF (caso pessoa física) e CNPJ (caso pessoa
 		// jurídica)
 		JLabel lblCpfCnpj = new JLabel("CPF/CNPJ:");
-		lblCpfCnpj.setBounds(462, 400, 400, 25);
+		lblCpfCnpj.setBounds(410, 400, 400, 25);
 		lblCpfCnpj.setFont(font);
 		lblCpfCnpj.setForeground(Color.WHITE); // Define a cor do texto como branco
 
 		cpfcnpJTextField = new JTextField();
-		cpfcnpJTextField.setBounds(550, 400, 150, 25);
+		cpfcnpJTextField.setBounds(500, 400, 200, 25);
 		cpfcnpJTextField.setFont(font);
-		cpfcnpJTextField.setForeground(Color.BLACK); // Define a cor do texto como preto
+		cpfcnpJTextField.setForeground(Color.BLACK);// Define a cor do texto como preto
+		cpfcnpJTextField.setDocument(new LimitarCaracteres(14));
 
 		pessoaFisica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Limite de 11 caracteres para CPF
-				cpfcnpJTextField.setDocument(new LimitarCaracteres(11));
+				cpfcnpJTextField.setDocument(new LimitarCaracteres(14));
+				cpfcnpJTextField.addKeyListener(new KeyAdapter() {
+				    @Override
+				    public void keyTyped(KeyEvent e) {
+				        String text = cpfcnpJTextField.getText();
+				        int length = text.length();
+
+				        if (length == 3 || length == 7) {
+				            text += ".";
+				            cpfcnpJTextField.setText(text);
+				        } else if (length == 11) {
+				            text += "-";
+				            cpfcnpJTextField.setText(text);
+				        
+				        }
+				    }
+				});
 			}
 		});
-
 		pessoaJuridica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Limite de 14 caracteres para CNPJ
-				cpfcnpJTextField.setDocument(new LimitarCaracteres(14));
+				cpfcnpJTextField.setDocument(new LimitarCaracteres(18));
+				cpfcnpJTextField.addKeyListener(new KeyAdapter() {
+				    @Override
+				    public void keyTyped(KeyEvent e) {
+				        String text = cpfcnpJTextField.getText();
+				        int length = text.length();
+
+				        if (length == 2 || length == 6) {
+				            text += ".";
+				            cpfcnpJTextField.setText(text);
+				        } else if (length == 10) {
+				            text += "/";
+				            cpfcnpJTextField.setText(text);
+				        } else if (length == 15) {
+				            text += "-";
+				            cpfcnpJTextField.setText(text);
+				        }
+				    }
+				});
 			}
 		});
 
@@ -289,6 +342,7 @@ public class CadastroClientes extends JFrame {
 		chamaListagem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					dispose(); // Fecha a janela atual
 					ListaClientes listagemClientes = new ListaClientes();
 					listagemClientes.setVisible(true); // Abre a janela do sistema gráfico
 				} catch (Exception e) {
@@ -340,7 +394,7 @@ public class CadastroClientes extends JFrame {
 			documentoCliente = cpfcnpJTextField.getText();
 			tipoPessoaCliente = "f";
 		} else {
-			documentoCliente = pessoaJuridica.getText();
+			documentoCliente = cpfcnpJTextField.getText();
 			tipoPessoaCliente = "j";
 		}
 
