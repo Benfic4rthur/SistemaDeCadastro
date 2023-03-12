@@ -914,9 +914,9 @@ public class ListaClientes extends JFrame {
 	    Document document = new Document();
 
 	    try {
+
 	    	PdfWriter.getInstance(document, new FileOutputStream("C:\\Sigm4 - Sistema De Gestão\\relatorios\\relatorio de cadastro de clientes.pdf"));
 	    	
-
 	    	// Define as margens do documento
 	    	document.setMargins(0, 0, 0, 0);
 

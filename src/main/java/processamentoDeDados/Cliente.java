@@ -115,7 +115,6 @@ public class Cliente {
 	public boolean salvaCadastroEditado() {
 	    boolean enviadoComSucesso = false;
 	    try {
-	    	
 	    	DaoCliente dao = new DaoCliente();
 	    	Cliente usuario = dao.buscarPorId(this.getId());
 	        if (usuario != null) {
@@ -136,5 +135,4 @@ public class Cliente {
 	    }
 	    return enviadoComSucesso;
 	}
-
 }

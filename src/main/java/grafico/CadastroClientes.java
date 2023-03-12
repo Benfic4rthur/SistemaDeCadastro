@@ -62,6 +62,9 @@ public class CadastroClientes extends JFrame {
 	private JRadioButton pessoaJuridica;
 	private ButtonGroup tipoPessoa;
 	private JTextField cpfcnpJTextField;
+	private JTextField cidadeField;
+	private JTextField cepField;
+	private JTextField numField;
 
 	public CadastroClientes(Long id) {
 		this.id = id;

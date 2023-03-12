@@ -172,7 +172,6 @@ public class LoginSistema extends JFrame {
 		//lembrarSenhaCheckbox.setBounds(815, 600, 150, 30);
 		contentPane.add(lembrarSenhaCheckbox);
 
-		
 		// adicionar a imagem de fundo com camada abaixo dos campos de login e senha
 		contentPane.add(loginfield, new Integer(-1));
 		contentPane.add(senhafield, new Integer(-1));

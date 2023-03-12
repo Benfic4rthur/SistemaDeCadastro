@@ -169,10 +169,13 @@ public class envioemail extends JFrame {
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					btnEnviar.setEnabled(false);
 					enviarEmail();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} finally {
+					btnEnviar.setEnabled(true);
 				}
 			}
 		});
@@ -194,7 +197,6 @@ public class envioemail extends JFrame {
 		btnLimpar.setBounds(230, 300, 89, 23);
 		contentPane.add(btnLimpar);
 	}
-
 	private void enviarEmail() throws IOException, Exception {
 		String telefone = telefoneField.getText();
 		telefone = telefone.replaceAll("[^0-9]", ""); // remove todos os caracteres não numéricos
@@ -210,7 +212,7 @@ public class envioemail extends JFrame {
 		String para = emailToField.getText();
 		String assunto = emailSubjectField.getText();
 		String mensagem = emailMessageArea.getText();
-		String username = "seu email hotmail.com aqui";
+		String username = "arthur.gu@hotmail.com";
 		String password = "mhytboqxsugbwiyo";
 		StringBuilder stringBuildermensagemEmail = new StringBuilder();
 		stringBuildermensagemEmail.append("<html><body style='background-color:#F5F5F5;'>");
@@ -240,7 +242,6 @@ public class envioemail extends JFrame {
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 			return;
 		}
-
 		if (anexo == null || !anexo.exists()) {
 			int anexoemail = JOptionPane.showConfirmDialog(null, "Deseja prosseguir o envio do e-mail sem anexo?");
 			if (anexoemail == JOptionPane.YES_OPTION) {
@@ -318,6 +319,5 @@ public class envioemail extends JFrame {
 				JOptionPane.showMessageDialog(null, "Ocorreu um erro ao enviar o e-mail: " + ex.getMessage());
 			}
 		}
-
 	}
 }
