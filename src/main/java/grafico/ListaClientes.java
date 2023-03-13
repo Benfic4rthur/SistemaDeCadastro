@@ -1117,14 +1117,14 @@ public class ListaClientes extends JFrame {
 	    	// Adiciona a tabela ao documento PDF
 	    	PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
 	    	pdfTable.setWidthPercentage(100);
-	    	pdfTable.setWidths(new float[]{4, 15, 20, 13, 12, 20, 14, 6 , 15, 9, 14, 4, 8, 11}); // Definindo as larguras das colunas
+	    	pdfTable.setWidths(new float[]{4, 15, 25, 12, 11, 15, 12, 5 , 13, 8, 14, 4, 9, 10}); // Definindo as larguras das colunas
 
 	    	// Define as margens internas das células da tabela
 	    	pdfTable.getDefaultCell().setPadding(5);
 
 	    	// Adiciona os cabeçalhos das colunas da tabela
 	    	for (int i = 0; i < table.getColumnCount(); i++) {
-	    	    PdfPCell cell = new PdfPCell(new Phrase(table.getColumnName(i), FontFactory.getFont(FontFactory.TIMES_ROMAN, 8)));
+	    	    PdfPCell cell = new PdfPCell(new Phrase(table.getColumnName(i), FontFactory.getFont(FontFactory.TIMES_ROMAN, 7)));
 	    	    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	    	    pdfTable.addCell(cell);
 	    	}
