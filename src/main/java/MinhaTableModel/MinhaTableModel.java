@@ -11,7 +11,8 @@ public class MinhaTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
     private List<Cliente> usuarios;
-    private String[] colunas = {"ID", "Nome", "E-mail", "Telefone", "Data de Nascimento", "Profissão", "Documento", "Tipo de Pessoa", "Endereço"};
+    private String[] colunas = {"ID", "Nome", "E-mail", "Telefone", "Nascimento", "Profissão", "Documento", "Tipo",
+    		"Rua", "Número", "Cidade", "UF", "Cep", "Residência"};
     private Object[][] dados;
 	private String[] columnNames;
 
@@ -51,6 +52,16 @@ public class MinhaTableModel extends AbstractTableModel {
                 return cliente.getTipopessoa();
             case 8:
                 return cliente.getEndereco();
+            case 9:
+            	return cliente.getNumero();
+            case 10:
+            	return cliente.getCidade();
+            case 11:
+            	return cliente.getEstado();
+            case 12:
+            	return cliente.getCep();
+            case 13:
+            	return cliente.getTipomoradia();
             default:
                 return null;
         }
@@ -92,7 +103,8 @@ public class MinhaTableModel extends AbstractTableModel {
     public void addRow(Cliente cliente) {
         Object[] novaLinha = {cliente.getId(), cliente.getNome(), cliente.getEmail(), cliente.getTelefone(),
                               cliente.getDatanascimento(), cliente.getProfissao(), cliente.getDocumento(),
-                              cliente.getTipopessoa(), cliente.getEndereco()};
+                              cliente.getTipopessoa(), cliente.getEndereco(), cliente.getNumero(), cliente. getCidade(),
+                              cliente.getEstado(), cliente.getCep(), cliente.getTipomoradia()};
         dados = Arrays.copyOf(dados, getRowCount() + 1);
         dados[getRowCount() - 1] = novaLinha;
         fireTableDataChanged();

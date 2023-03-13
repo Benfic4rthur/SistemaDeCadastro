@@ -23,8 +23,9 @@ public class DaoCliente {
 	public void salvar(Cliente cliente) {
 		PreparedStatement insert = null;
 		try {
-			String sql = "insert into tabela_cliente (id, nome, email, telefone, datanascimento, profissao, documento, tipopessoa, endereco)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into tabela_cliente (id, nome, email, telefone, datanascimento, profissao, documento, tipopessoa,"
+					+ " endereco, cep, numero, tipomoradia, cidade, estado )"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			insert = connection.prepareStatement(sql);
 			insert.setLong(1, cliente.getId());
 			insert.setString(2, cliente.getNome());
@@ -42,6 +43,12 @@ public class DaoCliente {
 			insert.setString(7, cliente.getDocumento());
 			insert.setString(8, cliente.getTipopessoa());
 			insert.setString(9, cliente.getEndereco());
+			insert.setString(10, cliente.getCep());
+			insert.setString(11, cliente.getNumero());
+			insert.setString(12, cliente.getTipomoradia());
+			insert.setString(13, cliente.getCidade());
+			insert.setString(14, cliente.getEstado());
+
 			insert.execute();
 			connection.commit(); // salva no banco
 		} catch (Exception e) {
@@ -100,13 +107,15 @@ public class DaoCliente {
 		PreparedStatement editar = null;
 		List<Cliente> clientes = new ArrayList<>();
 		try {
-			String sql = "SELECT id, nome, email, telefone, datanascimento, profissao, documento, tipopessoa, endereco FROM tabela_cliente";
+			String sql = "SELECT id, nome, email, telefone, datanascimento, profissao, documento, tipopessoa, endereco, cep, numero, tipomoradia, cidade, estado FROM tabela_cliente";
 			editar = connection.prepareStatement(sql);
 			ResultSet rs = editar.executeQuery();
 			while (rs.next()) {
 				Cliente cliente = new Cliente((int) rs.getLong("id"), rs.getString("nome"), rs.getString("email"),
 						rs.getString("telefone"), rs.getString("datanascimento"), rs.getString("profissao"),
-						rs.getString("documento"), rs.getString("tipopessoa"), rs.getString("endereco"));
+						rs.getString("documento"), rs.getString("tipopessoa"), rs.getString("endereco"),
+						rs.getString("cep"), rs.getString("numero"), rs.getString("tipomoradia"),
+						rs.getString("cidade"), rs.getString("estado"));
 				clientes.add(cliente);
 			}
 		} catch (Exception e) {
@@ -128,14 +137,16 @@ public class DaoCliente {
 		PreparedStatement select = null;
 		Cliente cliente = null;
 		try {
-			String sql = "SELECT nome, email, telefone, datanascimento, profissao, documento, tipopessoa, endereco FROM tabela_cliente WHERE id=?";
+			String sql = "SELECT nome, email, telefone, datanascimento, profissao, documento, tipopessoa, endereco, cep, numero, tipomoradia, cidade, estado FROM tabela_cliente WHERE id=?";
 			select = connection.prepareStatement(sql);
 			select.setLong(1, id);
 			ResultSet rs = select.executeQuery();
 			if (rs.next()) {
-				cliente = new Cliente((int) id, rs.getString("nome"), rs.getString("email"), rs.getString("telefone"),
-						rs.getString("datanascimento"), rs.getString("profissao"), rs.getString("documento"),
-						rs.getString("tipopessoa"), rs.getString("endereco"));
+				cliente = new Cliente((int) id, rs.getString("nome"), rs.getString("email"),
+						rs.getString("telefone"), rs.getString("datanascimento"), rs.getString("profissao"),
+						rs.getString("documento"), rs.getString("tipopessoa"), rs.getString("endereco"),
+						rs.getString("cep"), rs.getString("numero"), rs.getString("tipomoradia"),
+						rs.getString("cidade"), rs.getString("estado"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,5 +220,4 @@ public class DaoCliente {
 			}
 		}
 	}
-
 }
