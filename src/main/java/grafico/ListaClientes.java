@@ -103,7 +103,7 @@ public class ListaClientes extends JFrame {
 				try {
 					ListaClientes frame = new ListaClientes();
 					frame.setVisible(true);
-				} catch (Exception e) {
+					} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -323,27 +323,25 @@ public class ListaClientes extends JFrame {
 		contentPane.add(lbltipomoradia);
 		lbltipomoradia.setVisible(false);
 
-
 		// Criação do grupo de botões de opção para seleção do tipo de moradia
-		ButtonGroup tipomoradia = new ButtonGroup();
-
 		apartamento = new JRadioButton("Apto");
-		apartamento.setBounds(650, 170, 70, 25);
+		apartamento.setBounds(660, 170, 70, 25);
 		apartamento.setFont(font);
 		apartamento.setForeground(Color.WHITE);
 		apartamento.setOpaque(false);
 		apartamento.setSelected(true); // Adicionando a seleção do botão
-		tipomoradia.add(apartamento);
+		contentPane.add(apartamento);
 
 		casa = new JRadioButton("Casa");
 		casa.setBounds(720, 170, 100, 25);
 		casa.setFont(font);
 		casa.setForeground(Color.WHITE);
 		casa.setOpaque(false);
+		contentPane.add(casa);	
+		
+		tipomoradia = new ButtonGroup();
+		tipomoradia.add(apartamento);
 		tipomoradia.add(casa);
-
-		contentPane.add(apartamento);
-		contentPane.add(casa);
 
 		tipomoradiaField = new JTextField();
 		contentPane.add(tipomoradiaField);
@@ -398,7 +396,7 @@ public class ListaClientes extends JFrame {
 
 		pessoaFisica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Limite de 11 caracteres para CPF
+				// Limite de 14 caracteres para CPF
 				cpfcnpJTextField.setDocument(new LimitarCaracteres(14));
 				cpfcnpJTextField.addKeyListener(new KeyAdapter() {
 				    @Override
@@ -420,7 +418,7 @@ public class ListaClientes extends JFrame {
 		});
 		pessoaJuridica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Limite de 14 caracteres para CNPJ
+				// Limite de 18 caracteres para CNPJ
 				cpfcnpJTextField.setDocument(new LimitarCaracteres(18));
 				cpfcnpJTextField.addKeyListener(new KeyAdapter() {
 				    @Override
@@ -443,10 +441,7 @@ public class ListaClientes extends JFrame {
 			}
 		});
 		contentPane.add(lblCpfCnpj);
-		contentPane.add(cpfcnpJTextField);
-		
-		
-		
+		contentPane.add(cpfcnpJTextField);	
 		
 		// Atribui à variável connection uma instância de Connection obtida através do
 		// método getConnection() da classe SingleConnection
@@ -468,16 +463,29 @@ public class ListaClientes extends JFrame {
 		columnModel.getColumn(0).setMaxWidth(200);
 		columnModel.getColumn(7).setCellRenderer(new DefaultTableCellRenderer());
 		columnModel.getColumn(7).setPreferredWidth(7);
-		columnModel.getColumn(7).setMinWidth(50);
+		columnModel.getColumn(7).setMinWidth(35);
 		columnModel.getColumn(7).setMaxWidth(200);
 		columnModel.getColumn(4).setCellRenderer(new DefaultTableCellRenderer());
 		columnModel.getColumn(4).setPreferredWidth(4);
-		columnModel.getColumn(4).setMinWidth(120);
+		columnModel.getColumn(4).setMinWidth(80);
 		columnModel.getColumn(4).setMaxWidth(200);
 		columnModel.getColumn(6).setCellRenderer(new DefaultTableCellRenderer());
 		columnModel.getColumn(6).setPreferredWidth(6);
-		columnModel.getColumn(6).setMinWidth(120);
+		columnModel.getColumn(6).setMinWidth(115);
 		columnModel.getColumn(6).setMaxWidth(200);
+		columnModel.getColumn(11).setCellRenderer(new DefaultTableCellRenderer());
+		columnModel.getColumn(11).setPreferredWidth(11);
+		columnModel.getColumn(11).setMinWidth(35);
+		columnModel.getColumn(11).setMaxWidth(200);
+		columnModel.getColumn(9).setCellRenderer(new DefaultTableCellRenderer());
+		columnModel.getColumn(9).setPreferredWidth(9);
+		columnModel.getColumn(9).setMinWidth(55);
+		columnModel.getColumn(9).setMaxWidth(200);
+		columnModel.getColumn(12).setCellRenderer(new DefaultTableCellRenderer());
+		columnModel.getColumn(12).setPreferredWidth(12);
+		columnModel.getColumn(12).setMinWidth(65);
+		columnModel.getColumn(12).setMaxWidth(200);
+	
 
 		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
 		List<RowSorter.SortKey> sortKeys = new ArrayList<>();
@@ -544,7 +552,6 @@ public class ListaClientes extends JFrame {
 							// Trate o erro de parse da data
 							e1.printStackTrace();
 						}
-
 						profissao.setText((String) profissaocliente);
 						if (tipopessoa.equals("f")) {
 							pessoaFisica.setSelected(true);
@@ -557,7 +564,11 @@ public class ListaClientes extends JFrame {
 						cidadeField.setText((String) cidade);
 						estadobox.setText(ListaClientes.this.estado);
 						cepField.setText((String) cep);
-						tipomoradiaField.setText((String) tipomoradia);
+						if (tipomoradia.equals("Casa")) {
+							casa.setSelected(true);
+						} else {
+							apartamento.setSelected(true);
+						}
 						estadobox.setText((String) estado);
 						// Define o valor inicial do JComboBox para o valor no JTextField estadobox
 						for (int i = 0; i < estados.length; i++) {
@@ -821,15 +832,23 @@ public class ListaClientes extends JFrame {
 		JButton btnAtualizar = new JButton();
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
-				if (selectedRow == -1) {
 					// Atualiza a tabela com os dados atualizados
 					List<Cliente> usuariosAtualizados = dao.editar();
 					model.atualizar(usuariosAtualizados);
+					
 
-					// Simula um clique no botão de limpar para limpar os campos da interface
-					// gráfica
-				}
+					//limpa os campos da interfaca gráfica
+					nome.setText("");
+					email.setText("");
+					telefone.setText("");
+					dataNascimento.setText("");
+					endereco.setText("");
+					cidadeField.setText("");
+					cepField.setText("");
+					profissao.setText("");
+					cpfcnpJTextField.setText("");
+					numeroField.setText("");
+					buscaClienteTextField.setText("");
 			}
 		});
 		btnAtualizar.setBounds(800, 740, 75, 32);
@@ -983,7 +1002,6 @@ public class ListaClientes extends JFrame {
 		String estado = estadobox.getText();
 		String cep = cepField.getText();
 		String numero = numeroField.getText();
-		String tipomoradia = tipomoradiaField.getText();
 		String enderecoCliente = endereco.getText();
 		String profissaoCliente = profissao.getText();
 		SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy"); // Define o formato da entrada
@@ -1006,6 +1024,12 @@ public class ListaClientes extends JFrame {
 		} else {
 			documentoCliente = cpfcnpJTextField.getText();
 			tipoPessoaCliente = "j";
+		}
+		String tipomoradiaString = tipomoradia.getSelection().equals(casa.getModel()) ? "Casa" : "Apartamento";
+		if (tipomoradiaString.equals("Casa")) {
+			tipomoradiaString = tipomoradiaField.getText();
+		} else {
+			tipomoradiaString = tipomoradiaField.getText();
 		}
 
 		if (nomeCliente == null || nomeCliente.isEmpty()) {
@@ -1051,7 +1075,7 @@ public class ListaClientes extends JFrame {
 
 		// se todos os campos estiverem preenchidos, cria o objeto Cliente
 		Cliente cliente = new Cliente(id, nomeCliente, emailCliente, telefoneCliente, dataNascimentoFormatada,
-				profissaoCliente, documentoCliente, tipoPessoaCliente, enderecoCliente , cep, numero, tipomoradia, cidade, estado);
+				profissaoCliente, documentoCliente, tipoPessoaCliente, enderecoCliente , cep, numero, tipomoradiaString, cidade, estado);
 		try {
 			boolean enviadoComSucesso = cliente.salvaCadastroEditado();
 			if (enviadoComSucesso) {

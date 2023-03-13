@@ -166,7 +166,7 @@ public class DaoCliente {
 		PreparedStatement update = null;
 		try {
 			String sql = "UPDATE tabela_cliente SET nome=?, email=?, telefone=?, datanascimento=?, "
-					+ "profissao=?, documento=?, tipopessoa=?, endereco=? WHERE id=?;";
+					+ "profissao=?, documento=?, tipopessoa=?, endereco=?, numero=?, cidade=?, estado=?, cep=?, tipomoradia=? WHERE id=?;";
 			update = connection.prepareStatement(sql);
 			update.setString(1, cliente.getNome());
 			update.setString(2, cliente.getEmail());
@@ -183,7 +183,15 @@ public class DaoCliente {
 			update.setString(6, cliente.getDocumento());
 			update.setString(7, cliente.getTipopessoa());
 			update.setString(8, cliente.getEndereco());
-			update.setLong(9, cliente.getId());
+			update.setString(9, cliente.getNumero());
+			update.setString(10, cliente.getCidade());
+			update.setString(11, cliente.getEstado());
+			update.setString(12, cliente.getCep());			
+			update.setString(13, cliente.getTipomoradia());
+			
+			
+			update.setLong(14, cliente.getId());
+
 			update.execute();
 			connection.commit();
 		} catch (Exception e) {
