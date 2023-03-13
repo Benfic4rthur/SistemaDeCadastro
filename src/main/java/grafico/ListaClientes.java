@@ -115,7 +115,7 @@ public class ListaClientes extends JFrame {
 	public ListaClientes() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Listagem de Clientes - Sistema Cadastral");
-		setSize(1000, 850);
+		setSize(1000, 830);
 		 // Impede a maximização da janela
 	      setResizable(false);
 
@@ -145,16 +145,16 @@ public class ListaClientes extends JFrame {
 
 		// Criação dos campos de texto e labels para os dados do cliente
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(200, 20, 80, 25);
+		lblNome.setBounds(200, 40, 80, 25);
 		lblNome.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblNome);
 		nome = new JTextField();
 		lblNome.setFont(font);
-		nome.setBounds(255, 20, 200, 25);
+		nome.setBounds(255, 40, 200, 25);
 		contentPane.add(nome);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(520, 20, 80, 25);
+		lblTelefone.setBounds(520, 40, 80, 25);
 		lblTelefone.setForeground(Color.WHITE);
 		lblTelefone.setFont(font);
 		contentPane.add(lblTelefone);
@@ -168,27 +168,27 @@ public class ListaClientes extends JFrame {
 			System.out.println("Erro ao criar a máscara de formatação: " + ex.getMessage());
 		}
 		telefone = new JFormattedTextField(mascaraTelefone);
-		telefone.setBounds(600, 20, 200, 25);
+		telefone.setBounds(600, 40, 200, 25);
 		contentPane.add(telefone);
 
 		JLabel lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(540, 70, 80, 25);
+		lblEmail.setBounds(540, 90, 80, 25);
 		lblEmail.setFont(font);
 		lblEmail.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblEmail);
 
 		email = new JTextField();
-		email.setBounds(600, 70, 200, 25);
+		email.setBounds(600, 90, 200, 25);
 		contentPane.add(email);
 
 		JLabel lblDataNascimento = new JLabel("Data de Nascimento:");
-		lblDataNascimento.setBounds(185, 70, 200, 25);
+		lblDataNascimento.setBounds(185, 90, 200, 25);
 		lblDataNascimento.setForeground(Color.WHITE);
 		lblDataNascimento.setFont(font);
 		contentPane.add(lblDataNascimento);
 
 		dataNascimento = new JTextField("--/--/----");
-		dataNascimento.setBounds(355, 70, 100, 25);
+		dataNascimento.setBounds(355, 90, 100, 25);
 		dataNascimento.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -227,23 +227,23 @@ public class ListaClientes extends JFrame {
 		contentPane.add(dataNascimento);
 	
 		JLabel lblrua = new JLabel("Rua:");
-		lblrua.setBounds(490, 120, 80, 25);
+		lblrua.setBounds(490, 140, 80, 25);
 		lblrua.setFont(font);
 		lblrua.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblrua);
 
 		endereco = new JTextField();
-		endereco.setBounds(530, 120, 150, 25);
+		endereco.setBounds(530, 140, 150, 25);
 		contentPane.add(endereco);
 		
 		JLabel lblNumero = new JLabel("Número:");
-		lblNumero.setBounds(687, 120, 80, 25);
+		lblNumero.setBounds(687, 140, 80, 25);
 		lblNumero.setFont(font);
 		lblNumero.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblNumero);
 
 		numeroField = new JTextField();
-		numeroField.setBounds(760, 120, 40, 25);
+		numeroField.setBounds(760, 140, 40, 25);
 		contentPane.add(numeroField);	
 		
 		idEditado = new JTextField();
@@ -251,29 +251,29 @@ public class ListaClientes extends JFrame {
 		contentPane.add(idEditado);
 
 		JLabel lblProfissao = new JLabel("Profissão:");
-		lblProfissao.setBounds(172, 120, 80, 25);
+		lblProfissao.setBounds(172, 140, 80, 25);
 		lblProfissao.setFont(font);
 		lblProfissao.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblProfissao);
 
 		profissao = new JTextField();
-		profissao.setBounds(255, 120, 200, 25);
+		profissao.setBounds(255, 140, 200, 25);
 		contentPane.add(profissao);
 		
 		JLabel lblcidade = new JLabel("Cidade:");
-		lblcidade.setBounds(152, 170, 60, 25);
+		lblcidade.setBounds(152, 190, 60, 25);
 		lblcidade.setFont(font);
 		lblcidade.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblcidade);
 
 		cidadeField = new JTextField();
-		cidadeField.setBounds(215, 170, 150, 25);
+		cidadeField.setBounds(215, 190, 150, 25);
 		contentPane.add(cidadeField);
 		
 		
 		// Cria o JLabel para exibir "UF:"
 		JLabel lbluf = new JLabel("UF:");
-		lbluf.setBounds(372, 170, 60, 25);
+		lbluf.setBounds(372, 190, 60, 25);
 		lbluf.setFont(font);
 		lbluf.setForeground(Color.WHITE);
 		contentPane.add(lbluf);
@@ -283,7 +283,7 @@ public class ListaClientes extends JFrame {
 
 		// Cria o JComboBox com os estados
 		JComboBox<String> estadosBox = new JComboBox<>(estados);
-		estadosBox.setBounds(402, 170, 50, 25);
+		estadosBox.setBounds(402, 190, 50, 25);
 		estadosBox.addActionListener(e -> {
 		    JComboBox<String> cb = (JComboBox<String>) e.getSource();
 		    estado = (String) cb.getSelectedItem();
@@ -295,14 +295,14 @@ public class ListaClientes extends JFrame {
 		contentPane.add(estadosBox);
 		
 		JLabel lblCep = new JLabel("Cep:");
-		lblCep.setBounds(490, 170, 60, 25);
+		lblCep.setBounds(490, 190, 60, 25);
 		lblCep.setFont(font);
 		lblCep.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblCep);
 
 		cepField = new JTextField();
 		cepField.setDocument(new LimitarCaracteres(9));
-		cepField.setBounds(530, 170, 120, 25);
+		cepField.setBounds(530, 190, 120, 25);
 		cepField.addKeyListener(new KeyAdapter() {
 		    @Override
 		    public void keyTyped(KeyEvent e) {
@@ -325,7 +325,7 @@ public class ListaClientes extends JFrame {
 
 		// Criação do grupo de botões de opção para seleção do tipo de moradia
 		apartamento = new JRadioButton("Apto");
-		apartamento.setBounds(660, 170, 70, 25);
+		apartamento.setBounds(660, 190, 70, 25);
 		apartamento.setFont(font);
 		apartamento.setForeground(Color.WHITE);
 		apartamento.setOpaque(false);
@@ -333,7 +333,7 @@ public class ListaClientes extends JFrame {
 		contentPane.add(apartamento);
 
 		casa = new JRadioButton("Casa");
-		casa.setBounds(720, 170, 100, 25);
+		casa.setBounds(720, 190, 100, 25);
 		casa.setFont(font);
 		casa.setForeground(Color.WHITE);
 		casa.setOpaque(false);
@@ -359,21 +359,21 @@ public class ListaClientes extends JFrame {
 
 		// Criação do campo para selecionar se a pessoa é física ou jurídica
 		JLabel lblTipoPessoa = new JLabel("Tipo de Pessoa:");
-		lblTipoPessoa.setBounds(400, 220, 150, 25);
+		lblTipoPessoa.setBounds(400, 240, 150, 25);
 		lblTipoPessoa.setFont(font);
 		lblTipoPessoa.setForeground(Color.WHITE); // Define a cor do texto como branco
 		contentPane.add(lblTipoPessoa);
 
 		// Criação dos botões de opção para seleção do tipo de pessoa
 		pessoaFisica = new JRadioButton("Pessoa Física");
-		pessoaFisica.setBounds(530, 220, 150, 25);
+		pessoaFisica.setBounds(530, 240, 150, 25);
 		pessoaFisica.setFont(font);
 		pessoaFisica.setForeground(Color.WHITE);
 		pessoaFisica.setOpaque(false);
 		contentPane.add(pessoaFisica);
 
 		pessoaJuridica = new JRadioButton("Pessoa Jurídica");
-		pessoaJuridica.setBounds(660, 220, 160, 25);
+		pessoaJuridica.setBounds(660, 240, 160, 25);
 		pessoaJuridica.setFont(font);
 		pessoaJuridica.setForeground(Color.WHITE);
 		pessoaJuridica.setOpaque(false);
@@ -385,12 +385,12 @@ public class ListaClientes extends JFrame {
 
 		// Criação dos campos de texto para CPF (caso pessoa física) e CNPJ (caso pessoa jurídica)
 		JLabel lblCpfCnpj = new JLabel("CPF/CNPJ:");
-		lblCpfCnpj.setBounds(512, 257, 400, 25);
+		lblCpfCnpj.setBounds(512, 277, 400, 25);
 		lblCpfCnpj.setFont(font);
 		lblCpfCnpj.setForeground(Color.WHITE); // Define a cor do texto como branco
 
 		cpfcnpJTextField = new JTextField();
-		cpfcnpJTextField.setBounds(600, 255, 200, 25);
+		cpfcnpJTextField.setBounds(600, 275, 200, 25);
 		cpfcnpJTextField.setFont(font);
 		cpfcnpJTextField.setForeground(Color.BLACK); // Define a cor do texto como preto
 
@@ -475,7 +475,7 @@ public class ListaClientes extends JFrame {
 		columnModel.getColumn(6).setMaxWidth(200);
 		columnModel.getColumn(11).setCellRenderer(new DefaultTableCellRenderer());
 		columnModel.getColumn(11).setPreferredWidth(11);
-		columnModel.getColumn(11).setMinWidth(35);
+		columnModel.getColumn(11).setMinWidth(30);
 		columnModel.getColumn(11).setMaxWidth(200);
 		columnModel.getColumn(9).setCellRenderer(new DefaultTableCellRenderer());
 		columnModel.getColumn(9).setPreferredWidth(9);
@@ -485,6 +485,11 @@ public class ListaClientes extends JFrame {
 		columnModel.getColumn(12).setPreferredWidth(12);
 		columnModel.getColumn(12).setMinWidth(65);
 		columnModel.getColumn(12).setMaxWidth(200);
+		columnModel.getColumn(3).setCellRenderer(new DefaultTableCellRenderer());
+		columnModel.getColumn(3).setPreferredWidth(12);
+		columnModel.getColumn(3).setMinWidth(100);
+		columnModel.getColumn(3).setMaxWidth(200);
+	
 	
 
 		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -707,37 +712,33 @@ public class ListaClientes extends JFrame {
 
 		JButton btnExcluir = new JButton();
 		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedRow = table.getSelectedRow();
-				if (selectedRow == -1) {
-					JOptionPane.showMessageDialog(null, "Selecione um registro para excluir.");
-					return;
-				}
-				int excluir = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o registro?");
-				if (excluir == 0) {
-					long macacoId = (long) table.getModel().getValueAt(selectedRow, 0);
-
-					DaoCliente minhaDao = new DaoCliente();
-					minhaDao.excluir(macacoId);
-
-					// Atualiza a tabela com os dados atualizados
-					List<Cliente> usuariosAtualizados = dao.editar();
-					model.atualizar(usuariosAtualizados);
-					MinhaTableModel model = new MinhaTableModel(usuarios);
-					model.setRowCount(0);
-					ArrayList<Cliente> editar = new ArrayList<>();
-					JOptionPane.showMessageDialog(null, "registro excluido!");
-
-				} else if (excluir == 1 || excluir == 2) {
-					return;
-				}
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        int[] selectedRows = table.getSelectedRows();
+		        if (selectedRows.length == 0) {
+		            JOptionPane.showMessageDialog(null, "Selecione um registro para excluir.");
+		            return;
+		        }
+		        int excluir = JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir o(s) registro(s)?");
+		        if (excluir == 0) {
+		            for (int i = selectedRows.length - 1; i >= 0; i--) {
+		                long macacoId = (long) table.getModel().getValueAt(selectedRows[i], 0);
+		                DaoCliente minhaDao = new DaoCliente();
+		                minhaDao.excluir(macacoId);
+		            }
+		            List<Cliente> usuariosAtualizados = dao.editar();
+		            model.atualizar(usuariosAtualizados);
+		            JOptionPane.showMessageDialog(null, "registro(s) excluido(s)!");
+		        } else if (excluir == 1 || excluir == 2) {
+		            return;
+		        }
+		    }
 		});
 		btnExcluir.setBounds(180, 740, 55, 32);
 		ImageIcon iconeapagar = new ImageIcon("C:\\workspace-java\\sistema-pessoal-cadastro\\src\\main\\java\\images\\excluir.png");
 		Image imagem1 = iconeapagar.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		iconeapagar = new ImageIcon(imagem1);
 		btnExcluir.setIcon(iconeapagar);
+
 
 		// Crie uma nova janela de dica de ferramenta personalizada
 		JToolTip tooltip15 = new JToolTip();
